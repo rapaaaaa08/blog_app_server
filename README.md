@@ -143,10 +143,16 @@ Alamat kedua (IP LAN) itu yang dipakai kalau aplikasi mobile diuji di HP fisik.
 ### 5. Cek cepat
 
 ```bash
+# 1) server sudah hidup? (tidak menyentuh database)
+curl http://localhost:3006
+
+# 2) sudah tersambung ke database?
 curl http://localhost:3006/api/v1/posts
 ```
 
-Kalau balikannya JSON berisi artikel dari database, berarti server + MySQL sudah tersambung.
+Kalau yang pertama balik JSON info API tapi yang kedua error, berarti servernya jalan tapi koneksi
+MySQL-nya bermasalah. Kalau yang kedua balik JSON berisi artikel, berarti server + MySQL sudah
+tersambung.
 
 ### 6. Cek tipe TypeScript
 
@@ -155,6 +161,34 @@ npx tsc --noEmit
 ```
 
 ## Daftar Endpoint
+
+### Info API
+
+Endpoint ini diakses **langsung dari root server** (di luar prefix `/api/v1`):
+
+| Method | Endpoint | Fungsi |
+| --- | --- | --- |
+| `GET` | `/` | Info API: nama, versi, base URL, dan daftar endpoint yang tersedia |
+
+Contoh response:
+
+```json
+{
+  "success": true,
+  "message": "Blog App REST API aktif",
+  "data": {
+    "name": "Blog App Server",
+    "version": "1.0.0",
+    "baseUrl": "/api/v1",
+    "endpoints": {
+      "auth": "/api/v1/auth",
+      "posts": "/api/v1/posts",
+      "categories": "/api/v1/categories",
+      "users": "/api/v1/users"
+    }
+  }
+}
+```
 
 ### Artikel
 
