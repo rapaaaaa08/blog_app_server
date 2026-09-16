@@ -20,7 +20,22 @@ app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/categories", categoriesRoute);
 
 app.get("/", (req, res) => {
-  res.send("yg baca kek kontol");
+  // Sapaan API sekaligus info singkat endpoint yang tersedia.
+  res.json({
+    success: true,
+    message: "Blog App REST API aktif",
+    data: {
+      name: "Blog App Server",
+      version: "1.0.0",
+      baseUrl: "/api/v1",
+      endpoints: {
+        auth: "/api/v1/auth",
+        posts: "/api/v1/posts",
+        categories: "/api/v1/categories",
+        users: "/api/v1/users",
+      },
+    },
+  });
 });
 
 // ==========================================
