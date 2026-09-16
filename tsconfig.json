@@ -9,4 +9,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
+  // Cukup file di src/ yang di-typecheck.
+  // drizzle.config.ts ada di luar rootDir, jadi kalau ikut diambil `tsc` bakal error TS6059.
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
